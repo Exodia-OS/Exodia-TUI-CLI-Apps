@@ -1,0 +1,37 @@
+#
+# Maintainer: Mahmoud Mohamed (Ozil) <mmsaeed509@gmail.com> , <https://github.com/mmsaeed509>
+#
+
+_npmname=mapscii
+_npmver=0.3.1
+pkgname=exodia-mapscii
+pkgver=$_npmver
+pkgrel=4
+pkgdesc="MapSCII is a Braille & ASCII world map renderer for your console."
+arch=('any')
+url="https://github.com/rastapasta/mapscii#readme"
+license=('MIT')
+depends=('nodejs')
+makedepends=('npm' 'jq')
+source=(https://registry.npmjs.org/$_npmname/-/$_npmname-$_npmver.tgz)
+noextract=($_npmname-$_npmver.tgz)
+
+sha1sums=(
+          'SKIP'
+          )
+
+groups=('Exodia-TUI-Apps')
+
+package() {
+  
+  npm install -g --prefix "$pkgdir/usr" "$srcdir/$_npmname-$pkgver.tgz"
+  find "${pkgdir}/usr" -type d -exec chmod 755 {} +
+  chown -R root:root "${pkgdir}"
+  find "$pkgdir" -name package.json -print0 | xargs -r -0 sed -i '/_where/d'
+  local tmppackage="$(mktemp)"
+  local pkgjson="$pkgdir/usr/lib/node_modules/$_npmname/package.json"
+  jq '.|=with_entries(select(.key|test("_.+")|not))' "$pkgjson" > "$tmppackage"
+  mv "$tmppackage" "$pkgjson"
+  chmod 644 "$pkgjson"
+
+}
