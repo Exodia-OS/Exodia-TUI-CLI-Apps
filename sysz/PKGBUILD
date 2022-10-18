@@ -1,0 +1,21 @@
+#
+# Maintainer: Mahmoud Mohamed (Ozil) <mmsaeed509@gmail.com> , <https://github.com/mmsaeed509>
+#
+
+pkgname=sysz
+pkgver=1.4.3
+pkgrel=1
+pkgdesc="fzf terminal UI for systemctl"
+arch=('any')
+url="https://github.com/joehillen/sysz"
+license=('UNLICENSE')
+depends=('bash' 'fzf')
+source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/$pkgver.tar.gz")
+sha256sums=('SKIP')
+groups=('Exodia-TUI-Apps')
+
+package() {
+
+  install -Dm775 "$srcdir/$pkgname-$pkgver/sysz" "$pkgdir/usr/bin/sysz"
+  
+}
