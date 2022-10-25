@@ -8,7 +8,7 @@ pkgver=1.0.0
 pkgrel=1
 pkgdesc="A Simple TUI Google Translate client on your console (Unofficial)!"
 arch=('any')
-url="https://github.com/kraanzu/termtyper"
+url="https://github.com/snsd0805/GoogleTranslate-TUI"
 license=('MIT')
 
 depends=(
@@ -34,12 +34,12 @@ prepare() {
 package() {
 
     SRC_DIR=${pkgdir}/opt/exodia/TUI-Apps
-    SYSLINK_DIR=${pkgdir}/usr/bin
+    BIN_DIR=${pkgdir}/usr/bin
 
-    mkdir -p "$SRC_DIR" "$SYSLINK_DIR"
+    mkdir -p "$SRC_DIR" "$BIN_DIR"
 
     cp -r ${srcdir}/"${_pkgname}" "$SRC_DIR"
 
-    cp  ${srcdir}/"${pkgname}" "$SYSLINK_DIR"
+    cp  ${srcdir}/"${pkgname}" "$BIN_DIR"
 
 }

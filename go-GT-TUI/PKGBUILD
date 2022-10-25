@@ -1,0 +1,39 @@
+#
+# Maintainer: Mahmoud Mohamed (Ozil) <mmsaeed509@gmail.com> , <https://github.com/mmsaeed509>
+#
+
+pkgname=go-GT-TUI
+_pkgname=GTT
+pkgver=r2.98ff16d
+pkgrel=1
+pkgdesc="A Simple Google Translate TUI!"
+arch=('any')
+url="https://github.com/eeeXun/GTT"
+license=('MIT')
+depends=('go')
+makedepends=()
+groups=('Exodia-TUI-Apps')
+
+prepare() {
+
+	cp -r ../$_pkgname ${srcdir}
+
+}
+
+build() {
+    
+  cd ${srcdir}/$_pkgname
+  go get 
+  go build
+
+}
+
+package() {
+
+    BIN_DIR=${pkgdir}/usr/bin
+
+    mkdir -p "$BIN_DIR"
+
+    install -Dm 755 ${srcdir}/$_pkgname/gtt $BIN_DIR/$pkgname
+
+}
