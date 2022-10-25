@@ -1,0 +1,45 @@
+#
+# Maintainer: Mahmoud Mohamed (Ozil) <mmsaeed509@gmail.com> , <https://github.com/mmsaeed509>
+#
+
+pkgname=python-GT-TUI
+_pkgname=GoogleTranslate-TUI
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="A Simple TUI Google Translate client on your console (Unofficial)!"
+arch=('any')
+url="https://github.com/kraanzu/termtyper"
+license=('MIT')
+
+depends=(
+    
+    'python-npyscreen'
+    'python-requests'
+    'python-urllib3'
+    'python-pygame'
+   
+    )
+
+makedepends=()
+
+groups=('Exodia-TUI-Apps')
+
+prepare() {
+
+	cp -r ../$_pkgname ${srcdir}
+    cp ../$pkgname ${srcdir}
+
+}
+
+package() {
+
+    SRC_DIR=${pkgdir}/opt/exodia/TUI-Apps
+    SYSLINK_DIR=${pkgdir}/usr/bin
+
+    mkdir -p "$SRC_DIR" "$SYSLINK_DIR"
+
+    cp -r ${srcdir}/"${_pkgname}" "$SRC_DIR"
+
+    cp  ${srcdir}/"${pkgname}" "$SYSLINK_DIR"
+
+}
