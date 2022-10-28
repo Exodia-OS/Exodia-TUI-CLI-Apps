@@ -1,0 +1,39 @@
+#
+# Maintainer: Mahmoud Mohamed (Ozil) <mmsaeed509@gmail.com> , <https://github.com/mmsaeed509>
+#
+
+pkgname=kami
+pkgver=0.5
+pkgrel=1
+pkgdesc="A ln scraper to read light novels and watch anime in your terminal (Written in rust)"
+arch=('any')
+url="https://github.com/mrfluffy-dev/kami"
+license=('GPL')
+groups=('Exodia-TUI-Apps')
+
+depends=(
+
+	'rust'
+	'bat'
+	'mpv'
+
+)
+
+source=("https://codeload.github.com/mrfluffy-dev/kami/tar.gz/refs/tags/v$pkgver")
+md5sums=('SKIP')
+
+build() {
+	
+	cd "$pkgname-$pkgver"
+	cargo build --release
+    
+}
+
+
+package() {
+
+	BIN_DIR=${pkgdir}/usr/local/bin
+	mkdir -p ${BIN_DIR}
+	cp "$pkgname-$pkgver"/target/release/kami ${BIN_DIR}
+	
+}
