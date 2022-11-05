@@ -5,7 +5,7 @@
 pkgname=python-GT-TUI
 _pkgname=GoogleTranslate-TUI
 pkgver=1.0.0
-pkgrel=1
+pkgrel=2
 pkgdesc="A Simple TUI Google Translate client on your console (Unofficial)!"
 arch=('any')
 url="https://github.com/snsd0805/GoogleTranslate-TUI"
