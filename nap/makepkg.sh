@@ -1,0 +1,34 @@
+#
+# Copyright (C) 2022 Mahmoud Mohamed (00xWolf)  <https://github.com/mmsaeed509>
+# LICENSE © GNU-GPL3
+#
+
+
+# Script Termination
+exit_on_signal_SIGINT () {
+    { printf "\n\n%s\n" "Script interrupted." 2>&1; echo; }
+    exit 0
+}
+
+exit_on_signal_SIGTERM () {
+    { printf "\n\n%s\n" "Script terminated." 2>&1; echo; }
+    exit 0
+}
+
+trap exit_on_signal_SIGINT SIGINT
+trap exit_on_signal_SIGTERM SIGTERM
+
+# Build packages (create a binary package -> pkg.pkg.tar.zst)
+BUILDPKG () {
+
+    echo -e "\nRemoving old PKGs \n"
+    rm ./*.pkg.tar.zst
+	echo -e "\nBuilding Package...... \n"
+	makepkg -s -f
+	
+    rm -rf src pkg nap_0.1.1_linux_amd64.tar.gz
+    
+}
+
+# Execute
+BUILDPKG

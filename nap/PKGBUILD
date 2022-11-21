@@ -1,0 +1,24 @@
+#
+# Maintainer: Mahmoud Mohamed (00xWolf) <mmsaeed509@gmail.com> , <https://github.com/mmsaeed509>
+#
+
+pkgname=nap-bin
+_pkgname=nap
+pkgver=0.1.1
+pkgrel=1
+pkgdesc="Code snippets in your terminal"
+arch=('any')
+url="https://github.com/maaslalani/nap"
+depends=('go')
+source=("$url/releases/download/v$pkgver/${_pkgname}_${pkgver}_linux_amd64.tar.gz")
+md5sums=('SKIP')
+groups=('Exodia-TUI-Apps')
+
+package() {
+
+	BIN_DIR=${pkgdir}/usr/bin
+	mkdir -p ${BIN_DIR}
+
+	cp ${srcdir}/${_pkgname} ${BIN_DIR}
+
+}
