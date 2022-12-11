@@ -3,7 +3,7 @@
 #
 
 pkgname=glow-git
-pkgver=1.4.1.r18.g580642a
+pkgver=1.4.1.r35.g9f110c3
 pkgrel=1
 pkgdesc="Render markdown on the CLI, with pizzazz!"
 arch=('any')
