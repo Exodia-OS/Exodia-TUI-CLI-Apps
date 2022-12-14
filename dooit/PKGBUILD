@@ -1,0 +1,53 @@
+#
+# Maintainer: Mahmoud Mohamed (00xWolf) <mmsaeed509@gmail.com> , <https://github.com/mmsaeed509>
+#
+# Developer : Murli Tawari <https://github.com/kraanzu>
+#
+
+pkgname=dooit
+pkgver=0.2.1
+pkgrel=1
+pkgdesc="A todo manager that you didn't ask for, but needed!"
+url="https://github.com/kraanzu/dooit"
+arch=('any')
+license=('MIT')
+
+depends=(
+    
+    'python'
+    'python-pyperclip' 
+    'python-pyaml' 
+    'python-poetry' 
+    'python-textual'
+    
+    )
+    
+makedepends=(
+    
+    'python-build' 
+    'python-wheel' 
+    'python-installer' 
+    'flake8' 
+    'python-black' 
+    'python-pre-commit'
+    
+    )
+    
+source=("${url}/archive/refs/tags/v${pkgver}.tar.gz")
+sha256sums=('SKIP')
+groups=('Exodia-TUI-Apps')
+
+build() {
+
+    cd ${srcdir}/${pkgname}-${pkgver}
+    echo ${pkgdir}
+    python -m build --wheel --no-isolation
+
+}
+
+package() {
+    
+    cd ${srcdir}/${pkgname}-${pkgver}
+    python -m installer --destdir=${pkgdir} dist/*.whl
+
+}
