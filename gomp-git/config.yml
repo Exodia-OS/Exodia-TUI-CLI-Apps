@@ -48,7 +48,7 @@ MPD_PORT : "6600"
   # Port on which music player daemon is running
 
 
-DEFAULT_IMAGE_PATH:   "default.jpg"
+DEFAULT_IMAGE_PATH:   "~/.config/gomp/cover.jpg"
 
 GET_COVER_ART_FROM_LAST_FM : "TRUE" # Turn On Getting Album art from lastfm api
 LASTFM_API_KEY: "[Masked]"

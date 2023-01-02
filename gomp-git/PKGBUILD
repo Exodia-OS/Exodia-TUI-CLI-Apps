@@ -4,7 +4,7 @@
 
 pkgname=gomp-git
 pkgver=r329.0c0cbbf
-pkgrel=1
+pkgrel=2
 pkgdesc='MPD client inspired by ncmpcpp written in GO.'
 arch=('any')
 url="https://github.com/aditya-K2/gomp"
@@ -18,9 +18,11 @@ makedepends=(
 source=(
   "${pkgname}::git+${url}"
   "config.yml"
+  "cover.jpg"
   )
 
 sha256sums=(
+  'SKIP'
   'SKIP'
   'SKIP'
   )
@@ -38,6 +40,7 @@ pkgver() {
 prepare() {
 
    cp config.yml ${pkgname}
+   cp cover.jpg ${pkgname}
    cd ${pkgname}
    mkdir -p build
 
@@ -56,5 +59,6 @@ package() {
     cd ${pkgname}
     install -D build/gomp -t "${pkgdir}/usr/bin/"
     install -D config.yml -t "${pkgdir}/etc/skel/.config/gomp"
+    install -D cover.jpg -t "${pkgdir}/etc/skel/.config/gomp"
 
 }
