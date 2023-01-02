@@ -4,7 +4,7 @@
 
 pkgname=gomp-git
 pkgver=r329.0c0cbbf
-pkgrel=2
+pkgrel=3
 pkgdesc='MPD client inspired by ncmpcpp written in GO.'
 arch=('any')
 url="https://github.com/aditya-K2/gomp"
