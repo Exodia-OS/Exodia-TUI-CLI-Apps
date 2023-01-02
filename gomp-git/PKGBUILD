@@ -1,0 +1,60 @@
+#
+# Maintainer: Mahmoud Mohamed (00xWolf) <mmsaeed509@gmail.com> , <https://github.com/mmsaeed509>
+#
+
+pkgname=gomp-git
+pkgver=r329.0c0cbbf
+pkgrel=1
+pkgdesc='MPD client inspired by ncmpcpp written in GO.'
+arch=('any')
+url="https://github.com/aditya-K2/gomp"
+license=('GPL3')
+
+makedepends=(
+  'git'
+   'go'
+   )
+
+source=(
+  "${pkgname}::git+${url}"
+  "config.yml"
+  )
+
+sha256sums=(
+  'SKIP'
+  'SKIP'
+  )
+
+groups=('Exodia-TUI-Apps')
+install=${pkgname}.install
+
+pkgver() {
+
+  cd ${pkgname}
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+
+}
+
+prepare() {
+
+   cp config.yml ${pkgname}
+   cd ${pkgname}
+   mkdir -p build
+
+}
+
+build() {
+
+    export GOFLAGS="-buildmode=pie -trimpath -mod=readonly -modcacherw"
+    cd ${pkgname}
+    go build -o build
+
+}
+
+package() {
+
+    cd ${pkgname}
+    install -D build/gomp -t "${pkgdir}/usr/bin/"
+    install -D config.yml -t "${pkgdir}/etc/skel/.config/gomp"
+
+}
