@@ -1,0 +1,45 @@
+#
+# Maintainer: Mahmoud Mohamed (00xWolf) <mmsaeed509@gmail.com> , <https://github.com/mmsaeed509>
+#
+
+_pkgname=tempy
+pkgname=${_pkgname}-git
+pkgver=r8.40dd49e
+pkgrel=1
+pkgdesc="A simple, visually pleasing weather report in your terminal."
+url="https://github.com/noprobelm/tempy"
+arch=('any')
+license=('MIT')
+
+depends=(
+    
+    'python-rich' 
+    'python-requests' 
+    
+    )
+    
+source=("git+$url")
+sha256sums=('SKIP')
+groups=('Exodia-TUI-Apps')
+
+pkgver() {
+
+    cd ${_pkgname}
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)" 
+
+}
+
+build() {
+
+    cd ${srcdir}/${_pkgname}
+    echo ${pkgdir}
+    python -m build --wheel --no-isolation
+
+}
+
+package() {
+    
+    cd ${srcdir}/${_pkgname}
+    python -m installer --destdir=${pkgdir} dist/*.whl
+
+}

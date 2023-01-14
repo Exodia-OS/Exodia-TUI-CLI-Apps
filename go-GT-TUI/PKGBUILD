@@ -4,7 +4,7 @@
 
 pkgname=go-GT-TUI
 _pkgname=GTT
-pkgver=r2.98ff16d
+pkgver=e49639f
 pkgrel=1
 pkgdesc="A Simple Google Translate TUI!"
 arch=('any')
@@ -13,10 +13,13 @@ license=('MIT')
 depends=('go')
 makedepends=()
 groups=('Exodia-TUI-Apps')
+source=("git+${url}")
+sha256sums=('SKIP')
 
-prepare() {
+pkgver() {
 
-	cp -r ../$_pkgname ${srcdir}
+    cd ${_pkgname}
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)" 
 
 }
 

@@ -1,0 +1,66 @@
+#
+# Maintainer: Mahmoud Mohamed (00xWolf) <mmsaeed509@gmail.com> , <https://github.com/mmsaeed509>
+#
+
+_pkgname="mirro-rs"
+pkgname="${_pkgname}-git"
+pkgver=r94.2c94f93
+pkgrel=1
+url='https://github.com/kawaki-san/mirro-rs'
+arch=('any')
+pkgdesc="An Arch Linux mirrorlist management tool with a TUI"
+source=("git+$url")
+md5sums=('SKIP')
+groups=('Exodia-TUI-Apps')
+
+makedepends=(
+    'git'
+    'cargo'
+    )
+
+depends=(
+    'openssl'
+    'gcc-libs'
+    )
+
+license=(
+    'MIT' 
+    'Apache'
+    )
+
+pkgver() {
+
+    cd ${_pkgname}
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)" 
+
+}
+
+prepare() {
+
+    cd ${_pkgname}
+    cargo fetch --locked
+
+}
+
+build() {
+
+    cd ${_pkgname}
+    cargo build --frozen --release --features toml
+
+}
+
+package() {
+
+    cd ${_pkgname}
+
+    install -Dm0755 -t "$pkgdir/usr/bin/" "target/release/$_pkgname"
+    install -Dm644 LICENSE-APACHE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE-APACHE"
+    install -Dm644 LICENSE-MIT "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE-MIT"
+    install -Dm644 crates/$_pkgname/completions/${_pkgname}.bash "${pkgdir}/usr/share/bash-completion/completions/${_pkgname}.bash"
+    install -Dm644 crates/$_pkgname/completions/${_pkgname}.fish "${pkgdir}/usr/share/fish/vendor_completions.d/${_pkgname}.fish"
+    install -Dm644 crates/$_pkgname/completions/_${_pkgname} "${pkgdir}/usr/share/zsh/site-functions/_${_pkgname}"
+    install -Dm644 crates/$_pkgname/man/${_pkgname}.1 "${pkgdir}/usr/share/man/man1/_${_pkgname}.1"
+    install -Dm644 systemd/mirro-rs.service "${pkgdir}/usr/lib/systemd/system/mirro-rs.service"
+    install -Dm644 systemd/mirro-rs.timer "${pkgdir}/usr/lib/systemd/system/mirro-rs.timer"
+
+}

@@ -4,10 +4,9 @@
 # Developer : Murli Tawari <https://github.com/kraanzu>
 #
 
-pkgname=termtyper-git
-_gitname=termtyper
-pkgver=2.0.0.r49.g6be4ace
-pkgrel=1
+pkgname=termtyper
+pkgver=2.0.0
+pkgrel=3
 pkgdesc="A TUI application written in python for typing!"
 arch=('any')
 url="https://github.com/kraanzu/termtyper"
@@ -35,24 +34,21 @@ groups=('Exodia-TUI-Apps')
 
 provides=(termtyper)
 conflicts=(termtyper)
-source=("git+$url")
+source=("${url}/archive/refs/tags/v2.0.0.tar.gz")
 md5sums=('SKIP')
 
-
-
-pkgver() {
-	cd "${_gitname}"
-    git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
-}
-
 build() {
-	cd "${_gitname}"
+	
+    cd ${pkgname}-${pkgver}
     python -m build --wheel --no-isolation
+    
 }
 
 package() {
-    cd "${_gitname}"
+
+    cd ${pkgname}-${pkgver}
     python -m installer --destdir="${pkgdir}" dist/*.whl
     install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/termtyper/LICENSE"
     install -Dm644 README.md "${pkgdir}/usr/share/doc/termtyper/README.md"
+
 }

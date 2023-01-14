@@ -2,9 +2,9 @@
 # Maintainer: Mahmoud Mohamed (00xWolf) <mmsaeed509@gmail.com> , <https://github.com/mmsaeed509>
 #
 
-pkgname=ytfzf-git
-pkgver=r1698.cd09e5e
-pkgrel=3
+pkgname=ytfzf
+pkgver=2.5.3
+pkgrel=4
 pkgdesc="A posix script to find and watch youtube videos from the terminal. (Without API)"
 arch=('any')
 url="https://github.com/pystardust/ytfzf"
@@ -17,6 +17,10 @@ depends=(
         'curl'
         'grep'
         'sed'
+		'ueberzug'
+		'yt-dlp'
+		'fzf'
+		'mpv'
         
 )
 
@@ -34,20 +38,13 @@ optdepends=(
 
 )
 provides=('ytfzf')
-conflicts=("ytfzf")
-source=('ytfzf::git+https://github.com/pystardust/ytfzf.git#branch=development')
+conflicts=("ytfzf-git")
+source=("${url}/archive/refs/tags/v${pkgver}.tar.gz")
 md5sums=('SKIP')
-
-pkgver() {
-
-	cd "$srcdir/${pkgname%-git}"
-	printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
-
-}
 
 package() {
 
-	cd "$srcdir/${pkgname%-git}"
+	cd ${srcdir}/${pkgname}-${pkgver}
 	sed -i 's_\${YTFZF\_SYSTEM\_ADDON\_DIR:=/usr/local/share/ytfzf/addons}_\${YTFZF\_SYSTEM\_ADDON\_DIR:=/usr/share/ytfzf/addons}_' ${pkgname%-git}
 	make PREFIX="${pkgdir}/usr" install doc addons
         

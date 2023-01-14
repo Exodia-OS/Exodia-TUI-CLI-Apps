@@ -2,11 +2,10 @@
 # Maintainer: Mahmoud Mohamed (00xWolf) <mmsaeed509@gmail.com> , <https://github.com/mmsaeed509>
 #
 
-pkgname='ani-cli-git'
-_pkgname='ani-cli'
-pkgver=3.4.3.bc11b78
-pkgrel=3
-pkgdesc="A cli to browse and watch anime. (development version)"
+pkgname=ani-cli
+pkgver=3.4
+pkgrel=4
+pkgdesc="A cli tool to browse and play anime"
 arch=('any')
 url="https://github.com/pystardust/ani-cli"
 license=('GPL3')
@@ -21,6 +20,7 @@ depends=(
         'mpv'
         'axel'
         'ffmpeg'
+        'fzf'
         
 )
 
@@ -34,13 +34,13 @@ optdepends=(
 makedepends=('git')
 provides=('ani-cli')
 conflicts=('ani-cli')
-source=('ani-cli::git+https://github.com/pystardust/ani-cli.git')
+source=("${url}/archive/refs/tags/v${pkgver}.tar.gz")
 md5sums=('SKIP')
 groups=('Exodia-TUI-Apps')
 
 package() {
 
-        cd "$srcdir/${_pkgname}"
+        cd "${srcdir}/${pkgname}-${pkgver}"
 	install -Dm755 "./ani-cli" "$pkgdir/usr/bin/ani-cli"
         
 }
