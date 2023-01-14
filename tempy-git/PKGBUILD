@@ -5,11 +5,12 @@
 _pkgname=tempy
 pkgname=${_pkgname}-git
 pkgver=r8.40dd49e
-pkgrel=1
+pkgrel=3
 pkgdesc="A simple, visually pleasing weather report in your terminal."
 url="https://github.com/noprobelm/tempy"
 arch=('any')
 license=('MIT')
+groups=('Exodia-TUI-Apps')
 
 depends=(
     
