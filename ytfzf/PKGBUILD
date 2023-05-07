@@ -3,7 +3,7 @@
 #
 
 pkgname=ytfzf
-pkgver=2.5.3
+pkgver=2.5.5
 pkgrel=4
 pkgdesc="A posix script to find and watch youtube videos from the terminal. (Without API)"
 arch=('any')

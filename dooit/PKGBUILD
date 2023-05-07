@@ -5,7 +5,7 @@
 #
 
 pkgname=dooit
-pkgver=0.2.1
+pkgver=1.0.1
 pkgrel=1
 pkgdesc="A todo manager that you didn't ask for, but needed!"
 url="https://github.com/kraanzu/dooit"

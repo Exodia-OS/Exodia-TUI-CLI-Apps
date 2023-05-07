@@ -3,7 +3,7 @@
 #
 
 pkgname=ani-cli
-pkgver=3.4
+pkgver=4.2
 pkgrel=4
 pkgdesc="A cli tool to browse and play anime"
 arch=('any')
@@ -41,6 +41,6 @@ groups=('Exodia-TUI-Apps')
 package() {
 
         cd "${srcdir}/${pkgname}-${pkgver}"
-	install -Dm755 "./ani-cli" "$pkgdir/usr/bin/ani-cli"
+	install -Dm755 "./ani-cli" "${pkgdir}/usr/bin/ani-cli"
         
 }

@@ -1,0 +1,42 @@
+#
+# Maintainer: Mahmoud Mohamed (00xWolf) <mmsaeed509@gmail.com> , <https://github.com/mmsaeed509>
+#
+
+pkgname=book-cli
+_pkgname=book
+pkgver=e49639f
+pkgrel=1
+pkgdesc="Read ebooks from the comfort of your terminal."
+arch=('any')
+url="https://github.com/BetaPictoris/book"
+license=('MIT')
+depends=('go')
+makedepends=()
+groups=('Exodia-TUI-Apps')
+source=("git+${url}")
+sha256sums=('SKIP')
+
+pkgver() {
+
+    cd ${_pkgname}
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)" 
+
+}
+
+build() {
+    
+  cd ${srcdir}/${_pkgname}
+  go get 
+  go build
+
+}
+
+package() {
+
+    BIN_DIR=${pkgdir}/usr/bin
+
+    mkdir -p "${BIN_DIR}"
+
+    install -Dm 755 ${srcdir}/${_pkgname}/${_pkgname} ${BIN_DIR}/${pkgname}
+
+}

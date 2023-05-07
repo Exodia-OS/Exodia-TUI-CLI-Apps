@@ -4,7 +4,7 @@
 
 _pkgname="mirro-rs"
 pkgname="${_pkgname}-git"
-pkgver=r94.2c94f93
+pkgver=r100.ddb6ebd
 pkgrel=1
 url='https://github.com/kawaki-san/mirro-rs'
 arch=('any')

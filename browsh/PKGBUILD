@@ -3,7 +3,7 @@
 #
 
 pkgname=browsh
-pkgver=1.8.0
+pkgver=1.8.2
 pkgrel=3
 pkgdesc='A fully-modern text-based browser, rendering to TTY and browsers'
 arch=('any')
