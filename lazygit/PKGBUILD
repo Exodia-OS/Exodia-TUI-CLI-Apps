@@ -3,7 +3,7 @@
 #
 
 pkgname=lazygit
-pkgver=0.38.2
+pkgver=0.39.1
 pkgrel=2
 pkgdesc='A simple terminal UI for git commands'
 arch=('any')
@@ -11,7 +11,7 @@ url="https://github.com/jesseduffield/lazygit"
 license=('MIT')
 depends=('glibc')
 makedepends=('git' 'go-pie')
-conflicts=('lazygit')
+conflicts=('lazygit-git')
 provides=('lazygit')
 groups=('Exodia-TUI-Apps')
 source=("${url}/archive/v${pkgver}/${pkgname}-${pkgver}.tar.gz")

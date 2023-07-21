@@ -4,14 +4,14 @@
 
 pkgname="lobster"
 pkgver=4.0.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Shell script to watch Movies/Webseries/Shows from the terminal."
 arch=('any')
 url="https://github.com/justchokingaround/lobster.git"
 license=('GPL2')
 makedepends=('git')
 depends=(
-	'grep' 'sed' 'curl' 'fzf'
+	'grep' 'sed' 'curl' 'fzf' 'socat'
 	'mpv' 'html-xml-utils' 'patch'
 	)
 optdepends=(

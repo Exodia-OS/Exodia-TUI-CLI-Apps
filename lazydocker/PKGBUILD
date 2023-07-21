@@ -1,0 +1,36 @@
+#
+# Maintainer: Mahmoud Mohamed (00xWolf) <mmsaeed509@gmail.com> , <https://github.com/mmsaeed509>
+#
+
+pkgname=lazydocker
+pkgver=0.20.0
+pkgrel=1
+pkgdesc='A simple terminal UI for docker and docker-compose, written in Go with the gocui library.'
+arch=('any')
+url="https://github.com/jesseduffield/lazydocker"
+license=('MIT')
+depends=('glibc')
+makedepends=('go' 'git')
+conflicts=('lazydocker-git')
+provides=('lazydocker')
+groups=('Exodia-TUI-Apps')
+source=("${url}/archive/v${pkgver}/${pkgname}-${pkgver}.tar.gz")
+sha512sums=('SKIP')
+
+build() {
+
+  cd "${pkgname}-${pkgver}"
+    export CGO_CPPFLAGS="${CPPFLAGS}"
+    export CGO_CFLAGS="${CFLAGS}"
+    export CGO_CXXFLAGS="${CXXFLAGS}"
+    export GOFLAGS="-buildmode=pie -trimpath -mod=readonly -modcacherw"
+    go build -o ${pkgname} -ldflags "-extldflags ${LDFLAGS} -s -w -X main.version=${pkgver}" main.go
+
+}
+
+package() {
+
+  install -Dm755 "${pkgname}-${pkgver}/${pkgname}" ${pkgdir}/usr/bin/${pkgname}
+  install -Dm644 "${pkgname}-${pkgver}/LICENSE" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+  
+}

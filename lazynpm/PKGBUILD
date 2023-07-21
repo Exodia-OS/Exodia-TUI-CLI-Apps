@@ -1,0 +1,39 @@
+#
+# Maintainer: Mahmoud Mohamed (00xWolf) <mmsaeed509@gmail.com> , <https://github.com/mmsaeed509>
+#
+
+pkgname=lazynpm
+pkgver=0.1.4
+pkgrel=1
+pkgdesc='A terminal UI for npm'
+arch=('any')
+url="https://github.com/jesseduffield/lazynpm"
+license=('MIT')
+depends=('glibc')
+makedepends=('git' 'go-pie')
+conflicts=('lazynpm-git')
+provides=('lazynpm')
+groups=('Exodia-TUI-Apps')
+source=("${url}/archive/v${pkgver}/${pkgname}-${pkgver}.tar.gz")
+sha512sums=('SKIP')
+
+build() {
+
+  cd "${pkgname}-${pkgver}"
+    export CGO_CPPFLAGS="${CPPFLAGS}"
+    export CGO_CFLAGS="${CFLAGS}"
+    export CGO_CXXFLAGS="${CXXFLAGS}"
+    export GOFLAGS="-buildmode=pie -trimpath -mod=readonly -modcacherw"
+    go build -o ${pkgname} -ldflags "-extldflags ${LDFLAGS} -s -w -X main.version=${pkgver}" main.go
+
+}
+
+
+
+package() {
+
+  install -Dm755 "${pkgname}-${pkgver}/${pkgname}" ${pkgdir}/usr/bin/${pkgname}
+  install -Dm644 "${pkgname}-${pkgver}/LICENSE" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+  
+}
+
