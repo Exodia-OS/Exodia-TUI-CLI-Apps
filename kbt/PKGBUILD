@@ -1,0 +1,32 @@
+#
+# Maintainer: Mahmoud Mohamed (00xWolf) <mmsaeed509@gmail.com> , <https://github.com/mmsaeed509>
+#
+
+pkgname=kbt
+pkgver=1.2.1
+pkgrel=1
+pkgdesc="Keyboard tester in terminal"
+arch=('any')
+url="https://github.com/bloznelis/kbt"
+license=(MIT)
+groups=('Exodia-TUI-Apps')
+depends=()
+makedepends=(cargo)
+provides=("$pkgname")
+conflicts=("$pkgname")
+source=("$url/archive/refs/tags/$pkgver.tar.gz")
+sha256sums=('SKIP')
+
+build() {
+
+  cd "${pkgname}-${pkgver}"
+  make build
+
+}
+
+package() {
+  cd "${pkgname}-${pkgver}"
+
+  install -Dm755 target/release/$pkgname "$pkgdir/usr/bin/$pkgname"
+  install -Dm644 LICENSE -t "$pkgdir/usr/share/licenses/$pkgname/"
+}
