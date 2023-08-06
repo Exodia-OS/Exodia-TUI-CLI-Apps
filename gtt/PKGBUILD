@@ -1,0 +1,44 @@
+#
+# Maintainer: Mahmoud Mohamed (00xWolf) <mmsaeed509@gmail.com> , <https://github.com/mmsaeed509>
+#
+
+pkgname=gtt
+pkgver=8
+pkgrel=1
+pkgdesc="A Simple Google Translate TUI!"
+arch=('any')
+url="https://github.com/eeeXun/GTT"
+license=('MIT')
+depends=('go')
+makedepends=()
+groups=('Exodia-TUI-Apps')
+source=(
+  "${url}/archive/refs/tags/v${pkgver}.tar.gz"
+  "gtt.yml"
+)
+sha256sums=(
+  'SKIP'
+  'SKIP'
+  )
+install=${pkgname}.install
+
+prepare() {
+
+  cp gtt.yml ${pkgname}
+
+}
+
+build() {
+    
+  cd ${srcdir}/${pkgname}-${pkgver}
+  go get 
+  go build
+
+}
+
+package() {
+  
+  install -Dm 755 ${srcdir}/${pkgname}-${pkgver}/gtt -t "${pkgdir}/usr/bin/"
+  install -D ${srcdir}/gtt.yml -t "${pkgdir}/etc/skel/.config/gtt"
+
+}

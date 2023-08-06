@@ -1,0 +1,52 @@
+#
+# Maintainer: Mahmoud Mohamed (00xWolf) <mmsaeed509@gmail.com> , <https://github.com/mmsaeed509>
+#
+
+pkgname=goread
+pkgver=1.5.1
+pkgrel=1
+pkgdesc='A beautiful program to read your RSS/Atom feeds right in the terminal!'
+arch=('any')
+url="https://github.com/TypicalAM/goread"
+license=('GPL3')
+
+makedepends=(
+  'git'
+  'go'
+)
+
+source=(
+  "${url}/archive/refs/tags/v${pkgver}.tar.gz"
+  "urls.yml"
+  )
+
+sha256sums=(
+  'SKIP'
+  'SKIP'
+  )
+
+groups=('Exodia-TUI-Apps')
+install=${pkgname}.install
+
+prepare() {
+
+    cp urls.yml ${pkgname}
+    cd ${srcdir}/${pkgname}-${pkgver}
+    mkdir -p build
+
+}
+
+build() {
+
+    cd ${srcdir}/${pkgname}-${pkgver}
+    go build -o build
+
+}
+
+package() {
+
+    cd ${srcdir}/${pkgname}-${pkgver}
+    install -D build/goread -t "${pkgdir}/usr/bin/"
+    install -D ${srcdir}/urls.yml -t "${pkgdir}/etc/skel/.config/goread"
+
+}
