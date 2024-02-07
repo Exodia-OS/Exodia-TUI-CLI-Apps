@@ -1,0 +1,52 @@
+#
+# Maintainer: Mahmoud Mohamed (00xWolf) <mmsaeed509@gmail.com> , <https://github.com/mmsaeed509>
+#
+
+_pkgname=spectrum
+pkgname=spectrum-git
+pkgver=9ab50ff
+pkgrel=2
+pkgdesc='Console-based music player written in C++17 🎵'
+arch=('any')
+url='https://github.com/v1nns/spectrum'
+license=('MIT')
+depends=("alsa-lib" "ffmpeg" "fftw" "curl" "libxml++")
+makedepends=("git" "cmake" "ninja")
+provides=("spectrum")
+conflicts=("spectrum")
+groups=('Exodia-TUI-Apps')
+source=("spectrum::git+https://github.com/v1nns/spectrum")
+md5sums=("SKIP")
+
+pkgver() {
+
+  cd ${_pkgname}
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+
+}
+
+build() {
+
+    cd "$srcdir/${_pkgname}"
+    mkdir -p build && cd build
+    CXXFLAGS="$CFLAGS" cmake \
+        -DENABLE_INSTALL=ON \
+        -DSPECTRUM_DEBUG=OFF \
+        -DENABLE_TESTS=OFF \
+        -DENABLE_COVERAGE=OFF \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -G Ninja \
+        ..
+
+    cmake --build .
+
+}
+
+package() {
+
+    cd "$srcdir/${_pkgname}"
+    cd build
+    DESTDIR="$pkgdir/" cmake --install .
+    
+}
